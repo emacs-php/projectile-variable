@@ -31,6 +31,7 @@
 ;; (projectile-variable-plist)
 
 ;;; Code:
+(require 'cl-lib)
 (require 'projectile)
 
 (defconst projectile-variable--prefix "projectile-variable--")
@@ -39,9 +40,23 @@
   "Make symbol for save project local variable."
   (intern (concat projectile-variable--prefix (projectile-project-root))))
 
-(defun projectile-variable-plist ()
-  "Return project local property list."
-  (symbol-plist (projectile-variable--make-symbol)))
+(defun projectile-variable-plist (&optional prefix)
+  "Return project local property list.  Fiter properties by prefix if PREFIX is not nil."
+  (let ((plist (symbol-plist (projectile-variable--make-symbol)))
+        filtered-plist)
+    (if (null prefix)
+        plist
+      (cl-loop for (prop value) on plist by 'cddr
+               if (string-prefix-p prefix (symbol-name prop))
+               do (setq filtered-plist (plist-put filtered-plist prop value)))
+      filtered-plist)))
+
+(defun projectile-variable-alist (&optional prefix)
+  "Return project local property list as alist.  Fiter properties by prefix if PREFIX is not nil."
+  (let ((plist (symbol-plist (projectile-variable--make-symbol))))
+    (cl-loop for (prop value) on plist by 'cddr
+             if (or (null prefix) (string-prefix-p prefix (symbol-name prop)))
+             collect (cons prop value))))
 
 (defun projectile-variable-put (propname value)
   "Store the project local PROPNAME property with value VALUE."
