@@ -1,4 +1,4 @@
-;;; projectile-variable.el --- Project local variables. -*- mode: lexical-binding: t -*-
+;;; projectile-variable.el --- Store project local variables. -*- mode: lexical-binding: t -*-
 
 ;; Copyright (C) 2016 USAMI Kenta
 
