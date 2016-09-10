@@ -26,9 +26,15 @@
 
 ;;; Commentary:
 
-;; (projectile-variable-put 'hoge 2)
-;; (projectile-variable-get 'hoge)
-;; (projectile-variable-plist)
+;; Store project local variables (property).
+
+;; (projectile-variable-put 'foo-value 2) ;; Store property
+;; (projectile-variable-get 'foo-value)   ;;=> 2
+
+;; (projectile-variable-plist)        ;; Return all project local property list
+;; (projectile-variable-plist "foo-") ;; Return project local property list filterd by prefix "foo-"
+;; (projectile-variable-alist)        ;; Return all project local properties as association list (alist)
+;; (projectile-variable-alist "foo-") ;; Return project local properties alist filterd by prefix "foo-"
 
 ;;; Code:
 (require 'cl-lib)
