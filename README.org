@@ -1,6 +1,6 @@
 * Projectile Variable
 
-Store project local variables (property) using [[https://github.com/bbatsov/projectile][projectile]] and [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Symbol-Plists.html][Symbol Plists]].
+Store project local variables (property) using [[https://github.com/bbatsov/projectile][Projectile]] and [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Symbol-Plists.html][Symbol Plists]].
 
 #+BEGIN_SRC emacs-lisp
 (projectile-variable-put 'foo-value 2) ;; Store property 'foo-value
