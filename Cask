@@ -2,4 +2,6 @@
 (source "melpa" "https://melpa.org/packages/")
 
 (package-file "projectile-variable.el")
-(depends-on "projectile")
+
+(development
+ (depends-on "projectile"))
