@@ -7,7 +7,7 @@
 ;; Version: 0.0.1
 ;; Keywords: project, convenience
 ;; Homepage: https://github.com/zonuexe/projectile-variable
-;; Package-Requires: ((emacs "24") (cl-lib "0.5") (projectile "0.14.0"))
+;; Package-Requires: ((emacs "24") (cl-lib "0.5"))
 
 ;; This file is NOT part of GNU Emacs.
 
@@ -41,13 +41,32 @@
 
 ;;; Code:
 (require 'cl-lib)
-(require 'projectile)
+(require 'projectile nil t)
 
 (defconst projectile-variable--prefix "projectile-variable--")
 
+(defgroup projectile-variable nil
+  "Store project local variables."
+  :group 'lisp
+  :prefix "projectile-variable-")
+
+(defcustom projectile-variable-default-project-root-function #'projectile-project-root
+  "Default function to retrieve root directory."
+  :type 'function)
+
+(defvar projectile-variable-project-root-function nil)
+
+(defun projectile-variable--get-root ()
+  "Return path to root directory the project."
+  (if projectile-variable-project-root-function
+      (funcall projectile-variable-project-root-function)
+    (if (fboundp projectile-variable-default-project-root-function)
+        (funcall projectile-variable-default-project-root-function)
+      (error "Function `%s' is not exists" projectile-variable-default-project-root-function))))
+
 (defun projectile-variable--make-symbol ()
   "Make symbol for save project local variable."
-  (intern (concat projectile-variable--prefix (projectile-project-root))))
+  (intern (concat projectile-variable--prefix (projectile-variable--get-root))))
 
 (defun projectile-variable-plist (&optional prefix)
   "Return project local property list.  Fiter properties by prefix if PREFIX is not nil."
