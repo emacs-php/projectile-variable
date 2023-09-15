@@ -6,7 +6,7 @@
 ;; Created: 11 Sep 2016
 ;; Version: 0.0.2
 ;; Keywords: project, convenience
-;; Homepage: https://github.com/zonuexe/projectile-variable
+;; Homepage: https://github.com/emacs-php/projectile-variable
 ;; Package-Requires: ((emacs "24") (cl-lib "0.5"))
 
 ;; This file is NOT part of GNU Emacs.
