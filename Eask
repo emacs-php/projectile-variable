@@ -1,3 +1,5 @@
+;; -*- mode: eask; lexical-binding: t -*-
+
 (package "projectile-variable"
          "0.0.2"
          "Store project local variables.")
